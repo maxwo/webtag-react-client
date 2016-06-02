@@ -1,0 +1,42 @@
+@import 'node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+
+body {
+    background: $gray-dark;
+}
+
+.jumbotron {
+    @include box-shadow(inset 0 3px 5px rgba(0,0,0,.400));
+    margin-bottom: 0;
+}
+
+.inodeOverview {
+    @extend .col-md-3;
+    @include box-shadow(inset 0 3px 5px rgba(0,0,0,.300));
+    padding: 1em;
+    margin: 0.1em;
+    background-color: $gray-lighter;
+    height: 300px;
+
+    .inodeDetails>img {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .inodeDetails {
+        position: relative;
+
+    }
+}
+
+#searchFilters {
+    @extend .col-md-3;
+    @include box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+    color: $gray-lighter;
+}
+
+#searchResults {
+    @extend .col-md-9;
+    @include box-shadow(inset 0 3px 5px rgba(0,0,0,.600));
+    padding: 0;
+    margin: 0;
+}
