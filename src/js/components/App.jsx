@@ -2,8 +2,8 @@ import React from 'react';
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import './ServerNotification.jsx';
 import Notification from './Notification.jsx';
-import SearchFilters from './SearchFilters.jsx';
-import InodeList from './InodeList.jsx';
+import SearchFilters from './searchFilters/SearchFilters.jsx';
+import InodeList from './searchResults/InodeList.jsx';
 import ActionCreators from '../actions/WebtagActionCreators';
 
 let filter = {};

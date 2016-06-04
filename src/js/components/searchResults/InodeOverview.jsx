@@ -1,7 +1,7 @@
 import React from 'react';
-import InodeListStore from '../stores/InodeListStore';
+import InodeListStore from '../../stores/InodeListStore';
 import InodeDetails from './InodeDetails.jsx';
-import WebtagActionCreators from '../actions/WebtagActionCreators';
+import WebtagActionCreators from '../../actions/WebtagActionCreators';
 
 export default class InodeOverview extends React.Component {
 

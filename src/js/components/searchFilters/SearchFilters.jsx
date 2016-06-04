@@ -1,6 +1,6 @@
 import React from 'react';
-import AggregateStore from '../stores/AggregateStore';
-import WebtagActionCreators from '../actions/WebtagActionCreators';
+import AggregateStore from '../../stores/AggregateStore';
+import WebtagActionCreators from '../../actions/WebtagActionCreators';
 
 export default class SearchFilters extends React.Component {
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import ToolTip from 'react-portal-tooltip'
-import InodeListStore from '../stores/InodeListStore';
-import WebtagActionCreators from '../actions/WebtagActionCreators';
+import InodeListStore from '../../stores/InodeListStore';
+import WebtagActionCreators from '../../actions/WebtagActionCreators';
 
 export default class InodeDetails extends React.Component {
 
