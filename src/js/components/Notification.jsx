@@ -1,6 +1,6 @@
 import React from 'react';
 import LatestInodeStore from '../stores/LatestInodeStore';
-import InodeOverview from './InodeOverview.jsx';
+import InodeOverview from './searchResults/InodeOverview.jsx';
 
 export default React.createClass({
 
