@@ -17,6 +17,10 @@ body {
     background-color: $gray-lighter;
     height: 300px;
 
+    .inodeDetailsLoading {
+        z-index: 1000;
+    }
+
     .inodeDetails>img {
         display: block;
         margin: 0 auto;

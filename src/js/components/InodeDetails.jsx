@@ -1,5 +1,6 @@
 import React from 'react';
-import AggregateStore from '../stores/AggregateStore';
+import ToolTip from 'react-portal-tooltip'
+import InodeListStore from '../stores/InodeListStore';
 import WebtagActionCreators from '../actions/WebtagActionCreators';
 
 export default class InodeDetails extends React.Component {
@@ -14,32 +15,52 @@ export default class InodeDetails extends React.Component {
 
     componentDidMount() {
         console.log('InodeDetails.componentDidMount');
-        AggregateStore.addChangeListener(this.onChange);
+        InodeListStore.addChangeListener(this.onChange);
         if (this.state.inode === null) {
-            WebtagActionCreators.fetchInode(this.props.id)
+            WebtagActionCreators.fetchInode(this.props.id);
         }
     }
 
     componentWillUnmount() {
         console.log('InodeDetails.componentWillUnmount');
-        AggregateStore.removeChangeListener(this.onChange);
+        InodeListStore.removeChangeListener(this.onChange);
     }
 
     onChange() {
         console.log('InodeDetails.onChange');
+        const inode = InodeListStore.get(this.props.id);
         this.setState({
-            inode: InodeDetails.get(this.props.id),
+            inode,
         });
-        alert(this.state.inode);
     }
 
     render() {
         console.log('InodeDetails.render');
+        const id = this.props.id;
+        const parentId = `#inode-${id} .thumbnail`;
+        let inodeInformations = null;
+
+        if (this.state.inode !== null) {
+            inodeInformations = (
+                <ToolTip active={true} position="bottom" arrow="center" parent={parentId}>
+                    <div>
+                        <dl>
+                            <dt>Name</dt>
+                            <dd>{this.state.inode.file.filename}</dd>
+                            <dt>Size</dt>
+                            <dd>{this.state.inode.file.size}</dd>
+                            <dt>Tags</dt>
+                            <dd>{this.state.inode.tags.join(', ')}</dd>
+                        </dl>
+                    </div>
+                </ToolTip>
+            );
+        }
+
         return (
             <div>
-                coucou
-            </div>
-        )
+                {inodeInformations}
+            </div>);
     }
 }
 

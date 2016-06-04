@@ -32,14 +32,14 @@ export default class InodeOverview extends React.Component {
 
     render() {
         const image = `/api/data/${this.props.inode.id}?thumb=250x250`;
-        const inode = this.state;
+        const overviewId = `inode-${this.props.inode.id}`;
         const onClickBound = this.onClick.bind(this);
         let details = this.visibleDetails ? (
             <InodeDetails id={this.props.inode.id} />
         ) : null;
         const component = (
-            <div className="inodeOverview">
-                <div className="thumbnail" onMouseOver={onClickBound} onMouseOut={onClickBound}>
+            <div id={overviewId} className="inodeOverview">
+                <div className="thumbnail" onMouseEnter={onClickBound} onMouseLeave={onClickBound}>
                     <img src={image} role="presentation" alt={this.props.inode.id} />
                     {details}
                 </div>
