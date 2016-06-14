@@ -13,7 +13,7 @@ class WebtagDispatcher extends Dispatcher {
      * to server-originated events and treat them differently...
      **/
     handleServerAction(action) {
-        console.warn('handleServerAction', action);
+        console.info('handleServerAction', action);
         this.dispatch({
             source: Constants.ActionSources.SERVER_ACTION,
             action,
@@ -25,7 +25,7 @@ class WebtagDispatcher extends Dispatcher {
      * that actions triggered here originated on the client-side
      **/
     handleViewAction(action) {
-        console.warn('handleViewAction', action);
+        console.info('handleViewAction', action);
         this.dispatch({
             source: Constants.ActionSources.VIEW_ACTION,
             action,

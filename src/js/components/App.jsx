@@ -2,28 +2,35 @@ import React from 'react';
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import './ServerNotification.jsx';
 import Notification from './Notification.jsx';
-import SearchFilters from './searchFilters/SearchFilters.jsx';
-import InodeList from './searchResults/InodeList.jsx';
+import Navigation from './Navigation.jsx';
+import SearchFilters from './SearchFilters.jsx';
+import SearchResults from './SearchResults.jsx';
 import ActionCreators from '../actions/WebtagActionCreators';
 
 let filter = {};
 
 export default class App extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.filterChanged = this.filterChanged.bind(this);
+    }
+
     filterChanged(f) {
-        ActionCreators.searchInodes(f);
-        ActionCreators.fetchAggregates(f);
+        filter = f;
+        this.executeSearch(filter)
+    }
+
+    executeSearch(filter) {
+        ActionCreators.searchInodes(filter);
+        ActionCreators.fetchAggregates(filter);
     }
 
     render() {
 
         return (
             <div>
-                <nav class="navbar navbar-default navbar-static-top">
-                  <div class="container">
-                    ...
-                  </div>
-                </nav>
+                <Navigation onFilterChange={this.filterChanged} />
 
                 <Jumbotron>
                     <h1>Webtag</h1>
@@ -35,7 +42,7 @@ export default class App extends React.Component {
                 <SearchFilters initialSearch={filter} onFilterChange={this.filterChanged} />
 
                 <div className="col-md-9" id="searchResults">
-                    <InodeList initialSearch={filter} />
+                    <SearchResults initialSearch={filter} />
                 </div>
 
                 <Notification/>

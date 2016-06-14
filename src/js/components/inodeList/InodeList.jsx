@@ -1,16 +1,39 @@
 import React from 'react';
-import InodeListStore from '../../stores/InodeListStore';
 import InodeOverview from './InodeOverview.jsx';
-import WebtagActionCreators from '../../actions/WebtagActionCreators';
+import InodeRow from './InodeRow.jsx';
+import InodeImage from './InodeImage.jsx';
 
-export default class InodeRow extends React.Component {
+export default class InodeList extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             inodes: [],
         };
-        this.onChange = this.onChange.bind(this);
+        this.onClick = this.onClick.bind(this);
+        this.onMouseEnter = this.onMouseEnter.bind(this);
+        this.onMouseLeave = this.onMouseLeave.bind(this);
+    }
+
+    onClick(inode) {
+        console.log('InodeList.onClick');
+        if (this.props.onClick) {
+            this.props.onClick(inode);
+        }
+    }
+
+    onMouseEnter(inode) {
+        console.log('InodeList.onMouseEnter');
+        if (this.props.onMouseEnter) {
+            this.props.onMouseEnter(inode);
+        }
+    }
+
+    onMouseLeave(inode) {
+        console.log('InodeList.onMouseLeave');
+        if (this.props.onMouseLeave) {
+            this.props.onMouseLeave(inode);
+        }
     }
 
     computeImageWidth(image, currentHeight) {
@@ -24,30 +47,37 @@ export default class InodeRow extends React.Component {
     computeWidth(imageList, currentHeight) {
         let width = 0;
         for (const image of imageList) {
-            const w = this.computeImageWidth(image, currentHeight);
-            width += w;
+            width += this.computeImageWidth(image, currentHeight);
         }
-
         return width;
     }
 
     renderLine(inodeList) {
-        let currentHeight = 1000;
+        let currentHeight = 100;
         const totalWidth = 1000;//document.getElementById("searchResults").offsetWidth;
         const images = [];
-        while (this.computeWidth(inodeList, currentHeight) > totalWidth) {
-            currentHeight -= 10;
+
+        // TODO Implement dicotomy
+        while (this.computeWidth(inodeList, currentHeight) < totalWidth-4) {
+            currentHeight += 1;
         }
+
         for (const image of inodeList) {
-            console.warn(image);
             const width = this.computeImageWidth(image, currentHeight);
             const percent = 100 * width / totalWidth;
             const percentString = `${percent}%`;
-            const url = `/api/data/${image.id}?thumb=500x500`;
+            const key = `inode-key-${image.id}`;
             images.push(
-                <img src={url} width={percentString} />
+                <InodeImage
+                    key={key}
+                    image={image}
+                    width={percentString}
+                    onClick={this.onClick}
+                    onMouseEnter={this.onMouseEnter}
+                    onMouseLeave={this.onMouseLeave} />
             );
         }
+
         return images;
     }
 
@@ -68,12 +98,13 @@ export default class InodeRow extends React.Component {
                 </div>));
             counter++;
         }
+        console.log(inodeLines);
         return inodeLines;
     }
 
     render() {
         console.log('InodeList.render');
-        const inodes = this.state.inodes;
+        const inodes = this.props.inodes;
 
         return (
             <div>
@@ -82,6 +113,9 @@ export default class InodeRow extends React.Component {
     }
 }
 
-InodeRow.propTypes = {
-    inodes: React.PropTypes.array.isRequired,
+InodeList.propTypes = {
+    inodes: React.PropTypes.object.isRequired,
+    onMouseEnter: React.PropTypes.function,
+    onMouseLeave: React.PropTypes.function,
+    onClick: React.PropTypes.function,
 };

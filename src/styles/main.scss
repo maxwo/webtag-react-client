@@ -5,8 +5,11 @@ body {
 }
 
 .jumbotron {
-    @include box-shadow(inset 0 3px 5px rgba(0,0,0,.400));
     margin-bottom: 0;
+}
+
+.imageContainer {
+    display: inline-block;
 }
 
 .inodeOverview {
@@ -35,6 +38,10 @@ body {
     @extend .col-md-3;
     @include box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
     color: $gray-lighter;
+
+    input[type=text] {
+        color: $gray-darker;
+    }
 }
 
 #searchResults {

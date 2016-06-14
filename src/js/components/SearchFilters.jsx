@@ -1,6 +1,6 @@
 import React from 'react';
-import AggregateStore from '../../stores/AggregateStore';
-import WebtagActionCreators from '../../actions/WebtagActionCreators';
+import AggregateStore from '../stores/AggregateStore';
+import WebtagActionCreators from '../actions/WebtagActionCreators';
 
 export default class SearchFilters extends React.Component {
 
@@ -11,6 +11,7 @@ export default class SearchFilters extends React.Component {
         };
         this.onChange = this.onChange.bind(this);
         this.filterClicked = this.filterClicked.bind(this);
+        this.textClicked = this.textClicked.bind(this);
     }
 
     componentDidMount() {
@@ -30,8 +31,25 @@ export default class SearchFilters extends React.Component {
         console.error(AggregateStore.getAggregates());
         this.setState({
             aggregates: AggregateStore.getAggregates(),
+            search: AggregateStore.getFilters(),
         });
+        this.forceUpdate();
         console.error(this.state);
+    }
+
+    textClicked(event) {
+        event.preventDefault();
+
+        const text = document.getElementById('text').value;
+        if (text.length !== 0) {
+            this.state.search.text = document.getElementById('text').value;
+        } else {
+            this.state.search.text = undefined;
+        }
+
+        this.props.onFilterChange(this.state.search);
+
+        return false;
     }
 
     filterClicked(event) {
@@ -55,6 +73,7 @@ export default class SearchFilters extends React.Component {
 
     render() {
         console.log('SearchFilters.render');
+        console.log(this.state.search)
         const aggregates = this.state.aggregates;
         const currentSearch = this.state.search;
         const filters = [];
@@ -94,10 +113,10 @@ export default class SearchFilters extends React.Component {
             if (a.count===AggregateStore.getTotal()) {
                 checked = true;
             }
-
+/*
             console.info(currentSearch[name]);
             console.log(a.key +'='+ checked);
-
+*/
             return (
                 <div>
                     <input
@@ -124,7 +143,7 @@ export default class SearchFilters extends React.Component {
 
 SearchFilters.propTypes = {
     defaultSearch: React.PropTypes.object.isRequired,
-    onFilterChange: React.PropTypes.func,
+    onFilterChange: React.PropTypes.func.isRequired,
 };
 
 SearchFilters.defaultProps = {
