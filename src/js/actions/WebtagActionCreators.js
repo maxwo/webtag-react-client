@@ -20,6 +20,13 @@ export default {
         });
     },
 
+    editInode(inode) {
+        Dispatcher.handleViewAction({
+            actionType: Constants.ActionTypes.INODE_EDITED,
+            inode,
+        });
+    },
+
     searchInodes(filters = {}) {
         Dispatcher.handleViewAction({
             actionType: Constants.ActionTypes.INODE_SEARCH_REQUESTED,

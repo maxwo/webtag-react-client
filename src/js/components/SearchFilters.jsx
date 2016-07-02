@@ -1,5 +1,6 @@
 import React from 'react';
 import AggregateStore from '../stores/AggregateStore';
+import DateSearchFilter from './searchFilters/DateSearchFilter.jsx';
 import WebtagActionCreators from '../actions/WebtagActionCreators';
 
 export default class SearchFilters extends React.Component {
@@ -73,15 +74,13 @@ export default class SearchFilters extends React.Component {
 
     render() {
         console.log('SearchFilters.render');
-        console.log(this.state.search)
         const aggregates = this.state.aggregates;
-        const currentSearch = this.state.search;
+        const search = this.state.search;
         const filters = [];
-        console.warn(this.state);
 
         if (aggregates) {
             for (const agg in aggregates) {
-                filters.push(this.renderAggregateFilter(agg, aggregates[agg], currentSearch));
+                filters.push(this.renderAggregateFilter(agg, aggregates[agg], search));
             }
         }
 
@@ -93,7 +92,21 @@ export default class SearchFilters extends React.Component {
                     </h3>
                 </div>
                 <div className="search-body">
-                    { filters }
+
+                    <div>
+                        { filters }
+                    </div>
+
+                    <DateSearchFilter
+                        search={search}
+                        aggregates={aggregates}
+                        date="creation" />
+
+                    <DateSearchFilter
+                        search={search}
+                        aggregates={aggregates}
+                        date="document" />
+
                 </div>
             </div>
         );
@@ -101,8 +114,6 @@ export default class SearchFilters extends React.Component {
 
     renderAggregateFilter(filterName, aggregate, currentSearch) {
         console.log('SearchFilters.renderAggregateFilter');
-        console.log(aggregate);
-        console.log(currentSearch);
         const name = filterName.replace(/s$/, '');
 
         const inputs = aggregate.map((a) => {

@@ -1,4 +1,5 @@
 @import 'node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+@import 'node_modules/react-infinite-calendar/styles';
 
 body {
     background: $gray-dark;
@@ -36,7 +37,6 @@ body {
 
 #searchFilters {
     @extend .col-md-3;
-    @include box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
     color: $gray-lighter;
 
     input[type=text] {
@@ -46,7 +46,12 @@ body {
 
 #searchResults {
     @extend .col-md-9;
-    @include box-shadow(inset 0 3px 5px rgba(0,0,0,.600));
     padding: 0;
     margin: 0;
+
+    .searchResults {
+        color: $gray-lighter;
+        text-align: center;
+        padding: 0.5em;
+    }
 }

@@ -9,7 +9,7 @@ export default class InodeDetailsTooltip extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            inode: null,
+            inode: props.inode,
         };
         this.onChange = this.onChange.bind(this);
     }
@@ -64,7 +64,7 @@ export default class InodeDetailsTooltip extends React.Component {
         let parentId = null;
         let div = null;
 
-        if ( this.state.inode !== null && this.state.inode.file ) {
+        if ( this.state.inode && this.state.inode.file ) {
             parentId = `#inode-${this.state.inode.id}`;
             div = (
                 <div>

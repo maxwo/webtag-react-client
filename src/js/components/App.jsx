@@ -16,8 +16,7 @@ export default class App extends React.Component {
         this.filterChanged = this.filterChanged.bind(this);
     }
 
-    filterChanged(f) {
-        filter = f;
+    filterChanged(filter) {
         this.executeSearch(filter)
     }
 

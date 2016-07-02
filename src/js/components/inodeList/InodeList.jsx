@@ -46,6 +46,7 @@ export default class InodeList extends React.Component {
 
     computeWidth(imageList, currentHeight) {
         let width = 0;
+
         for (const image of imageList) {
             width += this.computeImageWidth(image, currentHeight);
         }
@@ -82,13 +83,19 @@ export default class InodeList extends React.Component {
     }
 
     renderLines(inodeList) {
+        const il = [];
         const inodeLines = [];
         let counter = 0;
-        while (inodeList.length > 0) {
+
+        for (let i=0 ; i<inodeList.length ; i++) {
+            il.push(inodeList[i])
+        }
+
+        while (il.length > 0) {
             const currentInodeList = [];
             for (let i=0 ; i<3 ; i++) {
-                if (inodeList.length > 0) {
-                    currentInodeList.push(inodeList.pop());
+                if (il.length > 0) {
+                    currentInodeList.push(il.pop());
                 }
             }
             const lineKey = `row-${counter}`;
@@ -98,7 +105,6 @@ export default class InodeList extends React.Component {
                 </div>));
             counter++;
         }
-        console.log(inodeLines);
         return inodeLines;
     }
 

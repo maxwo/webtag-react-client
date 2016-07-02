@@ -30,6 +30,12 @@
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
   },
+  "browserify": {
+    "transform": [
+      "babelify",
+      "reactify"
+    ]
+  },
   "scripts": {
     "dev": "gulp --type dev",
     "start": "gulp",
@@ -48,8 +54,14 @@
     ]
   },
   "dependencies": {
+    "eslint": "^2.12.0",
+    "eslint-plugin-import": "^1.9.1",
+    "eslint-plugin-jsx-a11y": "^1.5.3",
+    "eslint-plugin-react": "^5.2.1",
     "fetchify": "0.0.2",
     "flux": "^2.1.1",
+    "gulp-connect": "^4.1.0",
+    "gulp-sass": "^2.3.2",
     "jquery": "^2.2.4",
     "moment": "^2.13.0",
     "object-assign": "^4.1.0",
@@ -57,8 +69,11 @@
     "react-bootstrap": "^0.29.4",
     "react-dom": "^15.1.0",
     "react-edit-inline": "^1.0.7",
+    "react-image-magnifier": "git+https://github.com/francisPlaymore/react-image-magnifier.git",
+    "react-infinite-calendar": "^1.1.14",
     "react-notification-system": "^0.2.7",
-    "react-portal-tooltip": "^1.1.2",
+    "react-portal-tooltip": "^1.1.4",
+    "react-skylight": "^0.4.0",
     "socket.io-client": "^1.4.6"
   }
 }

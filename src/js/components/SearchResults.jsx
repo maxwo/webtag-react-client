@@ -3,6 +3,8 @@ import SearchResultStore from '../stores/SearchResultStore';
 import WebtagActionCreators from '../actions/WebtagActionCreators';
 import InodeList from './inodeList/InodeList.jsx';
 import InodeDetailsTooltip from './inodeList/InodeDetailsTooltip.jsx';
+import InodeEditor from './InodeEditor.jsx';
+import SearchResultsCount from './SearchResultsCount.jsx';
 
 export default class SearchResults extends React.Component {
 
@@ -37,11 +39,11 @@ export default class SearchResults extends React.Component {
 
     onClick(inode) {
         console.log('SearchResults.onClick');
+        WebtagActionCreators.editInode(inode);
     }
 
     onMouseEnter(inode) {
         console.log('SearchResults.onMouseEnter');
-        //WebtagActionCreators.fetchInode(inode.id);
         WebtagActionCreators.overviewInode(inode);
     }
 
@@ -51,14 +53,20 @@ export default class SearchResults extends React.Component {
     }
 
     render() {
-        console.log('InodeList.render');
+        console.log('SearchResults.render');
         const inodes = this.state.inodes;
         const selectedInode = this.state.selectedInode;
+
+        console.log(this.state);
 
         return (
             <div>
 
+                <SearchResultsCount inodes={inodes} />
+
                 <InodeDetailsTooltip />
+
+                <InodeEditor />
 
                 <InodeList
                     inodes={inodes}
